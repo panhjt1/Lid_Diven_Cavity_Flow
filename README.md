@@ -8,6 +8,10 @@ A SIMPLE Matlab code of Lid_Diven_Cavity_Flow
 - [ ] 线性方程组求解改成迭代法，增大单个SIMPLE迭代层的残差要求，节约计算资源
 - [ ] 检查过非稳态问题的结果
 
+demo.mlx 示例文件  
+array_data_stagger.m 交错网格存放的数据类，以及计算用的各种方法
+
+
 ## 速度
 <img width="420" height="315" alt="Vel" src="https://github.com/user-attachments/assets/8508018c-5f7b-4add-b889-071c538b96f0" />  
 
