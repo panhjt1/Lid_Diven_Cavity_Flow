@@ -12,7 +12,7 @@ Y_domain = n;% 总高m
 ncell_X  = n;% X向单元格数
 ncell_Y  = n;% Y向单元格数
 
-data = array_data_stagger(ncell_X, ncell_Y, X_domain, Y_domain);
+data = array_data_stagger(ncell_X, ncell_Y, X_domain, Y_domain)
 % 初始化变量值
 data.lam_cond = data.lam_cond*1;
 data.lam_vis = data.lam_vis*0.2;
@@ -92,7 +92,7 @@ axis equal
 figure()
 contourf(data.X, data.Y, data.Pprime)
 axis equal
-% 连续性方程残差云图，即压力修正方程的b项s
+% 连续性方程残差云图，即压力修正方程的b项
 figure()
 contourf(data.X, data.Y, b_P)
 axis equal
@@ -101,3 +101,4 @@ figure()
 plot(log10(continuity));
 ylabel('continuity residual in log scale');
 
+% save data_step1 data
