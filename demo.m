@@ -12,7 +12,7 @@ Y_domain = n;% 总高m
 ncell_X  = n;% X向单元格数
 ncell_Y  = n;% Y向单元格数
 
-data = array_data_stagger(ncell_X, ncell_Y, X_domain, Y_domain)
+data = array_data_stagger(ncell_X, ncell_Y, X_domain, Y_domain);
 % 初始化变量值
 data.lam_cond = data.lam_cond*1;
 data.lam_vis = data.lam_vis*0.2;
@@ -27,7 +27,7 @@ i  = 1;
 
 % load data_step1.mat
 
-for i = 1:2e3
+for i = 1:3e3
 % 求解过程
 % 更新动量方程系数
 [D_U_X, D_U_Y, F_U_X, F_U_Y] = data.flux_Ugrid(data.lam_vis);%D扩导，F截面上的质量流量
@@ -63,9 +63,7 @@ end
 % 绘图
 [UU, VV] =  data.vel_interp();
 % 矢量图
-
-xlabel('X 坐标 (m)'); % 建议加上单位
-ylabel('Y 坐标 (m)');
+figure()
 
 colormap('summer');
 contourf(data.X, data.Y, sqrt(UU.^2+VV.^2), 15,'LineStyle','none')
@@ -76,25 +74,30 @@ axis equal
 hold off
 xlim([0,n]);
 ylim([0,n]);
+xlabel('X/m'); % 建议加上单位
+ylabel('Y/m');
 % 流线图
 figure()
 verts = stream2(data.X, data.Y, UU, VV,data.X, data.Y,[0.1 150]);
 lineobj = streamline(verts);
+axis equal
 xlim([0,n]);
 ylim([0,n]);
-axis equal
+
 % 压力云图
+figure()
 contourf(data.X, data.Y, data.P)
 axis equal
 % 压力修正值云图
+figure()
 contourf(data.X, data.Y, data.Pprime)
 axis equal
-% 连续性方程残差云图，即压力修正方程的b项
+% 连续性方程残差云图，即压力修正方程的b项s
+figure()
 contourf(data.X, data.Y, b_P)
 axis equal
 % 连续性方程残差
+figure()
 plot(log10(continuity));
-% 速度云图
-contourf(data.X, data.Y, sqrt(UU.^2+VV.^2))
+ylabel('continuity residual in log scale');
 
-% save data_step1 data
